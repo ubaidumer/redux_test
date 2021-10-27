@@ -10,14 +10,15 @@ function characters(state=characters_json,action){
             let  removecharacters = [...state,createCharacter(action.id)];
             return removecharacters;
          case UPDATE_STRENGTH:
-                for (let i =0 ; i <state.length;i++){
-                    if(state[i].id == action.id){
-                        state[i].strength=action.strength+1;
-                    }
-                }
-                console.log("hello",state)
-                let update=state;
-                return update;
+            let updatecharacters = state.find(item=> item.id ===action.id );
+            if(updatecharacters!= undefined){
+                updatecharacters.strength= updatecharacters.strength+1;
+                console.log("ok",...state,  updatecharacters)
+                return  [...state];
+                
+            }else{
+                return state;
+            }
         default:
             return state;
     }

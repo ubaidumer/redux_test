@@ -11,14 +11,17 @@ function heros(state=[],action){
             let removeheros= state.filter(item=> item.id !== action.id);
             return removeheros;
         case UPDATE_STRENGTH:
-            for (let i =0 ; i <state.length;i++){
-                if(state[i].id == action.id){
-                    state[i].strength=action.strength+1;
-                }
+
+            let updateheros = state.find(item=> item.id ===action.id );
+            if(updateheros!= undefined){
+                console.log("heros update",updateheros)
+                updateheros.strength= updateheros.strength+1;
+                console.log("ok",...state, updateheros)
+                return  [...state];
+            }else{
+                return state;
             }
-            console.log("hello",state)
-            let update=state;
-            return update;
+            
         default:
             return state;
     }
